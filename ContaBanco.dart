@@ -1,13 +1,14 @@
 class Conta{
-  double chequeEspecial = 200.00;
+  double chequeEspecial = 0;
   int numConta = 0;
   String titular = '';
   double saldo = 0;
   
-  Conta(String titular, int conta){
-    this.saldo+=chequeEspecial;
-    
-    print("Seu saldo inicial é de R\$ ${getImprimirSaldo()}");
+ Conta(String titular, int conta){
+    this.titular = titular;
+    this.numConta = conta;
+    this.chequeEspecial = 200;
+    print("CONTA CRIADA COM SUCESSO.\n${getImprimirSaldo()}");
   }
   
   void setTitular(String titular){
@@ -19,12 +20,21 @@ class Conta{
   }
   
   void setSaque(double saque){
-    if ((saldo - saque) < 0){
-      print("SALDO EM CONTA INSUFICIENTE!\nTENTE UM VALOR MENOR OU CONFIRA SEU SALDO.\n");
+    if (chequeEspecial <= 0){
+      print("SALDO EM CONTA INSUFICIENTE!\nTENTE UM VALOR 
+
+MENOR OU CONFIRA SEU SALDO.\n");
     }
-    else{
-      this.saldo -= saque;
-      print("SALDO ATUAL: R\$ ${getImprimirSaldo()}");
+    else if ((saldo - saque) >= 0){
+      this.saldo-= saque;
+      print("${getImprimirSaldo()}");
+    }
+    else if(((saldo - saque) <= 0) && ((chequeEspecial - 
+
+(saldo - saque)) >= chequeEspecial )){
+      this.chequeEspecial += (saldo - saque);
+      this.saldo=0;
+      print("${getImprimirSaldo()}");
     }
   }
   
@@ -32,16 +42,16 @@ class Conta{
     this.saldo += deposito;
   }
   
-  double getImprimirSaldo(){
-    return this.saldo;
-  }
-  
-  
+  String getImprimirSaldo(){
+      return "SALDO ATUAL: R\$ $saldo\nVOCÊ TEM: R\$ 
+
+$chequeEspecial EM CHEQUE ESPECIAL.\n";   
+  } 
 }
 
 void main() {
   Conta conta1 = new Conta("João", 0010030);
   
-  conta1.setSaque(201);
+  conta1.setSaque(30);
   
 }
