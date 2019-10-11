@@ -1,0 +1,168 @@
+============================================================
+USANDO O MESMO TEMPLAT DO APP FRASES_DO_DIA
+COM POUCA MODIFICAÇÃO DA PARA SER FEITO O QUE ELE PEDE.
+
+SEGUE OBSERVANDO OS COMENTARIOS A BAIXO.
+============================================================ 
+
+
+
+import 'dart:math';
+
+import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
+
+//INICIALIZAÇÃO DO APP, NÃO PRECISA MODIFICAR.
+void main(){
+  runApp(MaterialApp(
+    debugShowCheckedModeBanner: false,
+    home: HomeFull(),
+    )
+  );
+}
+
+//ESSA CLASSE PODE MANTER COMO ESTAR TAMBEM
+class HomeFull extends StatefulWidget{
+  @override
+  _HomeState createState() => _HomeState();
+}
+
+//AQUI É ONDE DEVERAM FAZER AS MODIFICAÇÕES
+class _HomeState extends State<HomeFull> {
+  @override
+//CASO QUEIRA FAZER COM UM VETOR É SÓ TROCAR AS FRASES PELOS ATRIBTOS
+//QUE ELE PEDE.
+//EX:
+//VAR _CONTA=[
+//	"NOME',
+//	"NUMERO",
+//	"SALDO",
+//	];
+  var _frases =[
+    "Sou apenas um pequeno planeta...",
+    "Sou o planeta...",
+    "Ele é o planeta",
+    "Nos somos o planeta",
+  ];
+
+//AQUI É A MENSAGEM QUE É MOSTRADAD NA TELA DO APP
+//É SO DA UUM OUTRO NOME PRA VARIAVEL E MODIFICAR O TEXTO.
+  var _frasesGeradas = "Clique abaixo para gerar uma frasese";
+
+//ESSE _GERARFRASES PODE SER REMOVIDO.
+  void _gerarFrases(){
+    var numerosorteado = Random().nextInt(_frases.length);
+    setState(() {
+      _frasesGeradas = _frases[numerosorteado];
+    });
+  }
+
+//AQUI É O PRINCIPAL, SÃO OS METODOS DOS POTÕES
+//PARA CADA BOTÃO É INTERESSANTE TER UM METODO PROPRIO.
+  void _inicializar(){
+    //DENTRO DO METODOS AS FUNCIONALIDADES QUE VOCÊ QUER QE SEJA FEITO.
+  }
+
+  void _depositar(){
+    
+  }
+
+  void _sacar(){
+    
+  }
+
+  void _saldo(){
+    
+  }
+
+//AQUI COMEÇA A DÁ CARA AO APLICATIVO 
+//ESSA PARTE INICIAL PODE MANTER OU SE QUISER FAZER
+//ALGUMAS MODIFICAÇÕES, SUURGIRO Q FAÇA SÓ NO TITULO E COR
+  Widget build(BuildContext context) {
+    return Scaffold(
+        appBar: AppBar(
+//PARA MUDAR O TEXTO DA BARRA DE TITULO É SÓ TROCAR "OPERAÇÕES BANCARIAS" POR OUTRO
+          title: Text("Operações Bancarias"),
+          backgroundColor: Colors.purple,
+        ),
+        body: Container(
+          padding: EdgeInsets.all(16),
+          width: double.infinity,
+//ESSE DECORATION É OPCIONAL NÃO FAZ DIFERENÇA NA APLICAÇÃO.
+          decoration: BoxDecoration(
+              border: Border.all(width: 3, color: Colors.amber)
+          ),
+          child: Column(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: <Widget>[
+//PARA ACRESSENTAR UMA IMAGEM É SÓ DIZER O CAMINHO DE ONDE ELA ESTAR
+//NÃO ESQUECER DE HABILITAR O ASSERT.
+                Image.asset("imagem/moeda.png"),
+                Text(
+                  _frasesGeradas,
+                  textAlign: TextAlign.justify,
+                  style: TextStyle(
+                      fontSize: 20,
+                      fontStyle: FontStyle.italic,
+                      color: Colors.black
+                  ),
+                ),
+//AQUI VOCÊ PODE SER A FORMATAÇÃO EM LINHA PARA DEIXAR OS BOTÕES LADO A LADO
+//OU EM COLUNA PARA FICAR UM SOBRE O OUTRO.
+//FICA A DICA!
+                Row(
+                    children: <Widget>[
+//PARA O BOTÃO, PODE FAZER PEQUENAS MODIFICAÇÕES COMO MUTAR O TEXTO E A COR
+//NÃO PRECISA MAIS DO QUE ISSO.
+                    RaisedButton(
+//NOME QE SERAR MOSTRADO NO BOTÃO
+                      child: Text(
+                        "Iniciar",
+                        style: TextStyle(
+                          fontSize: 15,
+                          color: Colors.white,
+                        ),
+                      ),
+                      color: Colors.green,
+//AQUI O MAIS IMPORTANTE A CHAMADA DO MEDO REFERENTE AO BOTÃO
+//SANDO O ONPRESSED BASTA CHAMAR O METODO SEM OS PARENTESES NO FINAL.
+                      onPressed: _iniciar,
+                    ),
+
+                    RaisedButton(
+                      child: Text(
+                        "Saldo",
+                        style: TextStyle(
+                          fontSize: 15,
+                          color: Colors.white,
+                        ),
+                      ),
+                      color: Colors.green,
+                      onPressed: _gerarFrases,
+                    ),
+                  ],
+                ),
+              ]
+          ),
+        ),
+//ESSA E A BBARRA DO RODA-PÉ, TAMBEM E DESNESSESARIA,
+//FICA A SEU CRITERIO O USO.
+        bottomNavigationBar: BottomAppBar(
+          color: Colors.green,
+          child: Padding(
+            padding: EdgeInsets.all(16),
+            child: Row(
+              children: <Widget>[
+                Text("texto do roda-pé."),
+              ],
+            ),
+          ),
+        )
+    );
+  }
+}
+
+//ESPERO QUE ISSO AJUDE NA RESOLUÇÃO DA SUA AP1.
+
+
